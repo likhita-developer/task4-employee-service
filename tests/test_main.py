@@ -1,4 +1,5 @@
 from fastapi.testclient import TestClient
+
 from src.main import app
 
 client = TestClient(app)
@@ -24,11 +25,7 @@ def test_employee_not_found():
 def test_create_employee():
     response = client.post(
         "/employees",
-        json={
-            "name": "Test Employee",
-            "department": "IT",
-            "salary": 50000
-        }
+        json={"name": "Test Employee", "department": "IT", "salary": 50000},
     )
 
     if response.status_code == 400:
@@ -40,12 +37,7 @@ def test_create_employee():
 
 def test_empty_name():
     response = client.post(
-        "/employees",
-        json={
-            "name": "",
-            "department": "IT",
-            "salary": 50000
-        }
+        "/employees", json={"name": "", "department": "IT", "salary": 50000}
     )
     assert response.status_code == 422
 
@@ -53,10 +45,6 @@ def test_empty_name():
 def test_invalid_salary():
     response = client.post(
         "/employees",
-        json={
-            "name": "Invalid Salary Test",
-            "department": "IT",
-            "salary": -100
-        }
+        json={"name": "Invalid Salary Test", "department": "IT", "salary": -100},
     )
     assert response.status_code == 422
