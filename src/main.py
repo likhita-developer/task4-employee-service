@@ -1,7 +1,8 @@
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel, Field
 import json
 from pathlib import Path
+
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel, Field
 
 app = FastAPI()
 
